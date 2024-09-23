@@ -1,0 +1,14 @@
+# Eclipse specific files
+.settings/
+.project
+.classpath
+
+# Maven specific files
+target/
+*.log
+*.class
+
+# General files
+*.iml
+*.idea/
+*.DS_Store
