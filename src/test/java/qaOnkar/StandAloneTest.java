@@ -45,6 +45,7 @@ public class StandAloneTest {
 				break;
 			}
 			System.out.println(s);
+			
 		}
 		
 		w.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("#toast-container")));
