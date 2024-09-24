@@ -12,5 +12,6 @@ public class LandingPage {
 	{
 		this.driver=driver;
 		PageFactory.initElements(driver, this);
+		
 	}
 }
