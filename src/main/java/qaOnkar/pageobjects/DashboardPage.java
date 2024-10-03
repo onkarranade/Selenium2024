@@ -17,17 +17,19 @@ import qaOnkar.AbstractComponents.AbstractComponent;
 public class DashboardPage extends AbstractComponent {
 
 	
-	WebDriver driver= new ChromeDriver();
+	WebDriver driver;
 	WebDriverWait w;
 	public DashboardPage(WebDriver driver)
 	{	super(driver);
 		this.driver=driver;
-		this.w= new WebDriverWait(driver, Duration.ofSeconds(3));
+		//this.w= new WebDriverWait(driver, Duration.ofSeconds(3));
 		PageFactory.initElements(driver,this);
 		
 	}
 	
 	
+@FindBy(xpath = "//button[@routerlink='/dashboard/myorders']")	
+WebElement OrdersButton;
 	
 @FindBy(css = ".mb-3")
 	
@@ -64,5 +66,7 @@ public List<WebElement> getProductList()
 		cartButton.click();
 		
 	}
+	
+	
 	
 }

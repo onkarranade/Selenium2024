@@ -13,11 +13,13 @@ import qaOnkar.AbstractComponents.AbstractComponent;
 public class CartPage extends AbstractComponent {
 	WebDriver driver;
 	
+	
 	public CartPage(WebDriver driver)
 	 {
 		 super(driver);
 		 this.driver=driver;
 		 PageFactory.initElements(driver, this);
+		 
 	 }
 	
 	@FindBy(css = ".cartSection h3")

@@ -29,9 +29,9 @@ public class CheckoutPage extends AbstractComponent{
 	
 	By result=By.cssSelector(".ta-results");
 	
-	public void selectCountry()
+	public void selectCountry(String countryName)
 	{
-		country.sendKeys("india");
+		country.sendKeys(countryName);
 		waitForElementToAppear(result);
 		resultCountry.click();
 	}
