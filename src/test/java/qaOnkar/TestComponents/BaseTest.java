@@ -11,6 +11,7 @@ import java.util.Properties;
 import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.firefox.FirefoxDriver;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.AfterSuite;
 import org.testng.annotations.BeforeMethod;
@@ -44,6 +45,8 @@ public class BaseTest {
 		} else if (browserName.equalsIgnoreCase("firefox")) {
 			
 			//fireforx initialize
+			WebDriverManager.firefoxdriver().setup();
+			driver=new FirefoxDriver();
 			
 		}
 		driver.manage().window().maximize();
@@ -68,17 +71,25 @@ public class BaseTest {
 	
 	public LoginPage launchApplication() throws IOException
 	{
-		WebDriver driver = initializeDriver();
+		driver = initializeDriver();
 		 loginPage=new LoginPage(driver);
 		loginPage.goTo();
 		return loginPage;
 		
 	}
 	
-	@AfterSuite
+	@AfterMethod
 	public void tearDown()
 {
+		
+		if(driver !=null)
+		{
 		driver.quit();
+		}
+		else
+		{
+			System.out.println("driver is null , browser not closed");
+		}
 	}
 }
 
