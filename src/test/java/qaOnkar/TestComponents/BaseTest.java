@@ -11,6 +11,7 @@ import java.util.Properties;
 import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.AfterSuite;
@@ -33,14 +34,25 @@ public class BaseTest {
 		
 		Properties prop=new Properties();
 		FileInputStream fis=new FileInputStream("D:\\Selenium2024\\SeleniumJavaFramework\\src\\main\\java\\qaOnkar\\Resources\\GlobalData.properties");
+
 		prop.load(fis);
-		String browserName=prop.getProperty("browser");
+		
+		String browserName=	System.getProperty("browser")!=null ? System.getProperty("browser") :prop.getProperty("browser");
+		//String browserName=prop.getProperty("browser");
 		
 		
-		if(browserName.equalsIgnoreCase("chrome"))
+		if(browserName.contains("chrome"))
 		{
+			
+			ChromeOptions options=new ChromeOptions();
+			
 		WebDriverManager.chromedriver().setup();
-		 driver=new ChromeDriver();
+		
+		if(browserName.contains("headless"))
+		{
+		options.addArguments("headless");
+		}
+		 driver=new ChromeDriver(options);
 		
 		} else if (browserName.equalsIgnoreCase("firefox")) {
 			
@@ -78,7 +90,7 @@ public class BaseTest {
 		
 	}
 	
-	@AfterMethod
+	@AfterMethod(alwaysRun = true )
 	public void tearDown()
 {
 		
