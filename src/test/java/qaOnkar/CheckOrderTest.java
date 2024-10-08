@@ -30,5 +30,6 @@ public class CheckOrderTest extends BaseTest {
 		loginPage.loginApplication("qaonkar4@mailinator.com", "Qa@123456");
 		DashboardPage dashboardPage=new DashboardPage(driver);
 		dashboardPage.goToOrdersPage();
+		driver.quit();
 	}
 }

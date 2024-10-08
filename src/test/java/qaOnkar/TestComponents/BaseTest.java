@@ -11,6 +11,8 @@ import java.util.Properties;
 import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.firefox.FirefoxDriver;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.AfterSuite;
 import org.testng.annotations.BeforeMethod;
@@ -32,18 +34,31 @@ public class BaseTest {
 		
 		Properties prop=new Properties();
 		FileInputStream fis=new FileInputStream("D:\\Selenium2024\\SeleniumJavaFramework\\src\\main\\java\\qaOnkar\\Resources\\GlobalData.properties");
+
 		prop.load(fis);
-		String browserName=prop.getProperty("browser");
+		
+		String browserName=	System.getProperty("browser")!=null ? System.getProperty("browser") :prop.getProperty("browser");
+		//String browserName=prop.getProperty("browser");
 		
 		
-		if(browserName.equalsIgnoreCase("chrome"))
+		if(browserName.contains("chrome"))
 		{
+			
+			ChromeOptions options=new ChromeOptions();
+			
 		WebDriverManager.chromedriver().setup();
-		 driver=new ChromeDriver();
+		
+		if(browserName.contains("headless"))
+		{
+		options.addArguments("headless");
+		}
+		 driver=new ChromeDriver(options);
 		
 		} else if (browserName.equalsIgnoreCase("firefox")) {
 			
 			//fireforx initialize
+			WebDriverManager.firefoxdriver().setup();
+			driver=new FirefoxDriver();
 			
 		}
 		driver.manage().window().maximize();
@@ -68,17 +83,25 @@ public class BaseTest {
 	
 	public LoginPage launchApplication() throws IOException
 	{
-		WebDriver driver = initializeDriver();
+		driver = initializeDriver();
 		 loginPage=new LoginPage(driver);
 		loginPage.goTo();
 		return loginPage;
 		
 	}
 	
-	@AfterSuite
+	@AfterMethod(alwaysRun = true )
 	public void tearDown()
 {
+		
+		if(driver !=null)
+		{
 		driver.quit();
+		}
+		else
+		{
+			System.out.println("driver is null , browser not closed");
+		}
 	}
 }
 
