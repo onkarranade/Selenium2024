@@ -12,3 +12,5 @@ target/
 *.iml
 *.idea/
 *.DS_Store
+test-output/
+reports/
