@@ -125,15 +125,7 @@ public class SubmitOrderTest extends BaseTest {
 	public Object[][] gethasmapData() throws IOException
 	{
 	HashMap<String,String>	map=new HashMap<String, String>();
-	//	map.put("email", "qaonkar3@mailinator.com");
-	//	map.put("password","Qa@123456");
-	//	map.put("productName", "ZARA COAT 3");
-		
-	//	HashMap<String,String>	map1=new HashMap<String, String>();
-	//	map1.put("email", "qaonkar4@mailinator.com");
-	//	map1.put("password","Qa@123456");
-	//	map1.put("productName", "ADIDAS ORIGINAL");
-	//	return new Object[][] {{map}, {map1}};
+	
 	
 	 List <HashMap<String, String>>  data=getJsonDataToMap("D:\\Selenium2024\\SeleniumJavaFramework\\src\\test\\java\\qaOnkar\\data\\PurchaseOrder.json");
 	return new Object[][] { {data.get(0)},{data.get(1)}};
