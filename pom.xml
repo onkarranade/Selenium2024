@@ -19,7 +19,7 @@
 <dependency>
     <groupId>org.seleniumhq.selenium</groupId>
     <artifactId>selenium-java</artifactId>
-    <version>4.35.0</version>
+    <version>4.38.0</version>
 </dependency>
 
 <dependency>
@@ -83,7 +83,7 @@
   </profile>
   
    <profile>
-  <id>Regression</id>
+  <id>Login</id>
   <build>
    <pluginManagement>
    <plugins>
@@ -103,6 +103,48 @@
   </build>
   </profile> 
   
+  <profile>
+  <id>Regression</id>
+  <build>
+   <pluginManagement>
+   <plugins>
+   <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-surefire-plugin</artifactId>
+        <version>3.5.0</version>
+        <configuration>
+          <suiteXmlFiles>
+            <suiteXmlFile>testSuites/regressionTests.xml</suiteXmlFile>
+          </suiteXmlFiles>
+        </configuration>
+      </plugin>
+  </plugins>
+   </pluginManagement>
+  
+  </build>
+  </profile> 
+  
+  <profile>
+  <id>Sample</id>
+  <build>
+   <pluginManagement>
+   <plugins>
+   <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-surefire-plugin</artifactId>
+        <version>3.5.0</version>
+        <configuration>
+          <suiteXmlFiles>
+            <suiteXmlFile>testSuites/sampleTests.xml</suiteXmlFile>
+          </suiteXmlFiles>
+        </configuration>
+      </plugin>
+  </plugins>
+   </pluginManagement>
+  
+  </build>
+  </profile> 
+  
   </profiles>
   <build>
    <pluginManagement>
@@ -113,7 +155,7 @@
         <version>3.5.0</version>
         <configuration>
           <suiteXmlFiles>
-            <suiteXmlFile>testSuites/testng.xml</suiteXmlFile>
+            <suiteXmlFile>testSuites/sampletests.xml</suiteXmlFile>
           </suiteXmlFiles>
         </configuration>
       </plugin>

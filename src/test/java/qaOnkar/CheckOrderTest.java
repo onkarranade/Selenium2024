@@ -22,7 +22,7 @@ public class CheckOrderTest extends BaseTest {
 	String productname="ZARA COAT 3";
 	
 	
-	@Test
+	@Test(groups = {"login"})
 	
 	public void orderPage() throws IOException
 	{
