@@ -28,95 +28,84 @@ import qaOnkar.pageobjects.LoginPage;
 public class BaseTest {
 
 	public WebDriver driver;
-	
+
 	public LoginPage loginPage;
-	public WebDriver initializeDriver() throws IOException
-	{
-		
-		
-		Properties prop=new Properties();
-		FileInputStream fis=new FileInputStream("D:\\Selenium2024\\SeleniumJavaFramework\\src\\main\\java\\qaOnkar\\Resources\\GlobalData.properties");
+
+	public WebDriver initializeDriver() throws IOException {
+
+		Properties prop = new Properties();
+		FileInputStream fis = new FileInputStream(
+				"D:\\Selenium2024\\SeleniumJavaFramework\\src\\main\\java\\qaOnkar\\Resources\\GlobalData.properties");
 
 		prop.load(fis);
-		
-		String browserName=	System.getProperty("browser")!=null ? System.getProperty("browser") :prop.getProperty("browser");
-		//String browserName=prop.getProperty("browser");
-		
-		
-		if(browserName.contains("chrome"))
-		{
-			
-			ChromeOptions options=new ChromeOptions();
-			
-		WebDriverManager.chromedriver().setup();
-		
-		if(browserName.contains("headless"))
-		{
-		options.addArguments("headless");
-		}
-		 driver=new ChromeDriver(options);
-		
+
+		String browserName = System.getProperty("browser") != null ? System.getProperty("browser")
+				: prop.getProperty("browser");
+		// String browserName=prop.getProperty("browser");
+
+		if (browserName.contains("chrome")) {
+
+			ChromeOptions options = new ChromeOptions();
+
+			WebDriverManager.chromedriver().setup();
+
+			if (browserName.contains("headless")) {
+				options.addArguments("headless");
+			}
+			driver = new ChromeDriver(options);
+
 		} else if (browserName.equalsIgnoreCase("firefox")) {
-			
-			//fireforx initialize
+
+			// fireforx initialize
 			WebDriverManager.firefoxdriver().setup();
-			driver=new FirefoxDriver();
-			
+			driver = new FirefoxDriver();
+
 		}
 		driver.manage().window().maximize();
-		
+
 		return driver;
-		
+
 	}
-	
-	public List<HashMap<String, String>> getJsonDataToMap(String filePath) throws IOException
-	{
-		
-		
-		//read json to string
-		String jsonContent=FileUtils.readFileToString(new File(filePath), StandardCharsets.UTF_8);
-	
-	//String to hasmap with jackson bind
-	ObjectMapper mapper=new ObjectMapper();
-	
-	List<HashMap<String, String>> data=mapper.readValue(jsonContent,new TypeReference<List<HashMap<String,String>>>() {} );
-	return data;
+
+	public List<HashMap<String, String>> getJsonDataToMap(String filePath) throws IOException {
+
+		// read json to string
+		String jsonContent = FileUtils.readFileToString(new File(filePath), StandardCharsets.UTF_8);
+
+		// String to hasmap with jackson bind
+		ObjectMapper mapper = new ObjectMapper();
+
+		List<HashMap<String, String>> data = mapper.readValue(jsonContent,
+				new TypeReference<List<HashMap<String, String>>>() {
+				});
+		return data;
 	}
-	
-	
-	public LoginPage launchApplication() throws IOException
-	{
+
+	public LoginPage launchApplication() throws IOException {
 		driver = initializeDriver();
-		 loginPage=new LoginPage(driver);
+		loginPage = new LoginPage(driver);
 		loginPage.goTo();
 		return loginPage;
-		
+
 	}
-	
-	public String getScreenshot(String testCaseName,WebDriver driver) throws IOException
-	{
-		
-		TakesScreenshot ts=(TakesScreenshot)driver;
-		File source=ts.getScreenshotAs(OutputType.FILE);
-		File file=new File(System.getProperty("user.dir")+"//reports//"+testCaseName+".png");
+
+	public String getScreenshot(String testCaseName, WebDriver driver) throws IOException {
+
+		TakesScreenshot ts = (TakesScreenshot) driver;
+		File source = ts.getScreenshotAs(OutputType.FILE);
+		File file = new File(System.getProperty("user.dir") + "//reports//" + testCaseName + ".png");
 		FileUtils.copyFile(source, file);
-		return System.getProperty("user.dir") + "//reports//" + testCaseName+".png";
-		
+		return System.getProperty("user.dir") + "//reports//" + testCaseName + ".png";
+
 	}
-	
-	@AfterMethod(alwaysRun = true )
-	public void tearDown()
-{
-		
-		if(driver !=null)
-		{
-		driver.quit();
-		}
-		else
-		{
+
+	@AfterMethod(alwaysRun = true)
+	public void tearDown() {
+
+		if (driver != null) {
+			driver.quit();
+		} else {
 			System.out.println("driver is null , browser not closed");
 		}
 	}
 }
-
-

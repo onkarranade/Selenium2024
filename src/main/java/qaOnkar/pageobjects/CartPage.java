@@ -12,34 +12,31 @@ import qaOnkar.AbstractComponents.AbstractComponent;
 
 public class CartPage extends AbstractComponent {
 	WebDriver driver;
-	
-	
-	public CartPage(WebDriver driver)
-	 {
-		 super(driver);
-		 this.driver=driver;
-		 PageFactory.initElements(driver, this);
-		 
-	 }
-	
+
+	public CartPage(WebDriver driver) {
+		super(driver);
+		this.driver = driver;
+		PageFactory.initElements(driver, this);
+
+	}
+
 	@FindBy(css = ".cartSection h3")
-private	List<WebElement> cartProducts;
-	
+	private List<WebElement> cartProducts;
+
 	@FindBy(xpath = "//button[contains(text(),'Checkout')]")
 	WebElement checkoutButton;
-	
-	public boolean verifyCartProducts(String productName)
-	{
-		//List<WebElement> cartProducts=driver.findElements(By.cssSelector(".cartSection h3"));
-		
-	//	System.out.println(cartProducts.get(0).getText());
-		Boolean match=cartProducts.stream().anyMatch(cartProduct->cartProduct.getText().equalsIgnoreCase(productName));
+
+	public boolean verifyCartProducts(String productName) {
+		// List<WebElement>
+		// cartProducts=driver.findElements(By.cssSelector(".cartSection h3"));
+
+		// System.out.println(cartProducts.get(0).getText());
+		Boolean match = cartProducts.stream()
+				.anyMatch(cartProduct -> cartProduct.getText().equalsIgnoreCase(productName));
 		return match;
 	}
-	public void checkOut()
-	{
+
+	public void checkOut() {
 		checkoutButton.click();
 	}
 }
-
-

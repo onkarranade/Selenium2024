@@ -10,34 +10,30 @@ import qaOnkar.AbstractComponents.AbstractComponent;
 
 public class ConfirmationPage extends AbstractComponent {
 
-	
 	WebDriver driver;
-	
-	public ConfirmationPage(WebDriver driver)
-	{
+
+	public ConfirmationPage(WebDriver driver) {
 		super(driver);
-		this.driver=driver;
+		this.driver = driver;
 		PageFactory.initElements(driver, this);
-		
+
 	}
-	
-	@FindBy(css=".hero-primary")
+
+	@FindBy(css = ".hero-primary")
 	WebElement confirmtext;
-	
+
 	@FindBy(css = "label[class='ng-star-inserted']")
 	WebElement orderID;
-	
+
 	By text = By.cssSelector(".hero-primary");
-	
-	public String confirmText()
-	{
+
+	public String confirmText() {
 		waitForElementToAppear(text);
-		 return confirmtext.getText();
+		return confirmtext.getText();
 	}
-	
-	public String getOrderID()
-	{
-		String ordernumber =orderID.getText();
+
+	public String getOrderID() {
+		String ordernumber = orderID.getText();
 		return ordernumber;
 	}
 }

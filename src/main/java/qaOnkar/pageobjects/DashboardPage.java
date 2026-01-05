@@ -16,57 +16,54 @@ import qaOnkar.AbstractComponents.AbstractComponent;
 
 public class DashboardPage extends AbstractComponent {
 
-	
 	WebDriver driver;
 	WebDriverWait w;
-	public DashboardPage(WebDriver driver)
-	{	super(driver);
-		this.driver=driver;
-		//this.w= new WebDriverWait(driver, Duration.ofSeconds(3));
-		PageFactory.initElements(driver,this);
-		
+
+	public DashboardPage(WebDriver driver) {
+		super(driver);
+		this.driver = driver;
+		// this.w= new WebDriverWait(driver, Duration.ofSeconds(3));
+		PageFactory.initElements(driver, this);
+
 	}
-	
-	
-@FindBy(xpath = "//button[@routerlink='/dashboard/myorders']")	
-WebElement OrdersButton;
-	
-@FindBy(css = ".mb-3")
-	
+
+	@FindBy(xpath = "//button[@routerlink='/dashboard/myorders']")
+	WebElement OrdersButton;
+
+	@FindBy(css = ".mb-3")
+
 	List<WebElement> products;
 
-@FindBy(css=".ng-animating")
-WebElement spinner;
+	@FindBy(css = ".ng-animating")
+	WebElement spinner;
 
-By ProductsBy= By.cssSelector(".mb-3");
-By addToCart = By.cssSelector(".card-body button:last-of-type");
-By toastMessage= By.cssSelector("#toast-container");
+	By ProductsBy = By.cssSelector(".mb-3");
+	By addToCart = By.cssSelector(".card-body button:last-of-type");
+	By toastMessage = By.cssSelector("#toast-container");
 
+	@FindBy(css = "[routerlink*='/dashboard/cart']")
+	WebElement cartButton;
 
-@FindBy(css="[routerlink*='/dashboard/cart']")
-WebElement cartButton;
-public List<WebElement> getProductList()
-	{
+	public List<WebElement> getProductList() {
 		waitForElementToAppear(ProductsBy);
 		return products;
 	}
-	
-	public WebElement getProductByName(String productName)
-	{
-		WebElement prod= getProductList().stream().filter(product->product.findElement(By.cssSelector("b")).getText().equals(productName)).findFirst().orElse(null);
+
+	public WebElement getProductByName(String productName) {
+		WebElement prod = getProductList().stream()
+				.filter(product -> product.findElement(By.cssSelector("b")).getText().equals(productName)).findFirst()
+				.orElse(null);
 		return prod;
 	}
-	
+
 	public void addProductToCart(String productName) {
-		
-		WebElement prod=getProductByName(productName);
+
+		WebElement prod = getProductByName(productName);
 		prod.findElement(By.cssSelector(".card-body button:last-of-type")).click();
 		waitForElementToAppear(toastMessage);
 		waitForElementToDisappear(spinner);
 		cartButton.click();
-		
+
 	}
-	
-	
-	
+
 }

@@ -18,17 +18,14 @@ import qaOnkar.pageobjects.LoginPage;
 
 public class CheckOrderTest extends BaseTest {
 
-	
-	String productname="ZARA COAT 3";
-	
-	
-	@Test(groups = {"login"})
-	
-	public void orderPage() throws IOException
-	{
-		LoginPage loginPage=launchApplication();
+	String productname = "ZARA COAT 3";
+
+	@Test(groups = { "login" })
+
+	public void orderPage() throws IOException {
+		LoginPage loginPage = launchApplication();
 		loginPage.loginApplication("qaonkar4@mailinator.com", "Qa@123456");
-		DashboardPage dashboardPage=new DashboardPage(driver);
+		DashboardPage dashboardPage = new DashboardPage(driver);
 		dashboardPage.goToOrdersPage();
 		driver.quit();
 	}

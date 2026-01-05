@@ -13,17 +13,19 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 public class DataReader {
 
-	public List<HashMap<String, String>> getJsonDataToMap() throws IOException
-	{
-		
-		
-		//read json to string
-		String jsonContent=FileUtils.readFileToString(new File("D:\\Selenium2024\\SeleniumJavaFramework\\src\\test\\java\\qaOnkar\\data\\PurchaseOrder.json"), StandardCharsets.UTF_8);
-	
-	//String to hasmap with jackson bind
-	ObjectMapper mapper=new ObjectMapper();
-	
-	List<HashMap<String, String>> data=mapper.readValue(jsonContent,new TypeReference<List<HashMap<String,String>>>() {} );
-	return data;
+	public List<HashMap<String, String>> getJsonDataToMap() throws IOException {
+
+		// read json to string
+		String jsonContent = FileUtils.readFileToString(
+				new File("D:\\Selenium2024\\SeleniumJavaFramework\\src\\test\\java\\qaOnkar\\data\\PurchaseOrder.json"),
+				StandardCharsets.UTF_8);
+
+		// String to hasmap with jackson bind
+		ObjectMapper mapper = new ObjectMapper();
+
+		List<HashMap<String, String>> data = mapper.readValue(jsonContent,
+				new TypeReference<List<HashMap<String, String>>>() {
+				});
+		return data;
 	}
 }
