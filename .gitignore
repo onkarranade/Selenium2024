@@ -1,3 +1,7 @@
+#vscode specific files
+.vscode/    
+
+
 # Eclipse specific files
 .settings/
 .project
