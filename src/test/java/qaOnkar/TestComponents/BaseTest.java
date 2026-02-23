@@ -35,7 +35,10 @@ public class BaseTest {
 
 		Properties prop = new Properties();
 		FileInputStream fis = new FileInputStream(
-				"D:\\Selenium2024\\SeleniumJavaFramework\\src\\main\\java\\qaOnkar\\Resources\\GlobalData.properties");
+				 System.getProperty("user.dir") + 
+			        "/src/main/java/qaOnkar/Resources/GlobalData.properties");
+		//FileInputStream fis = new FileInputStream(
+				//"D:\\Selenium2024\\SeleniumJavaFramework\\src\\main\\java\\qaOnkar\\Resources\\GlobalData.properties");
 
 		prop.load(fis);
 
@@ -47,17 +50,18 @@ public class BaseTest {
 
 			ChromeOptions options = new ChromeOptions();
 
-			WebDriverManager.chromedriver().setup();
+			//WebDriverManager.chromedriver().setup();
 
 			if (browserName.contains("headless")) {
-				options.addArguments("headless");
+				options.addArguments("--headless");
+				
 			}
 			driver = new ChromeDriver(options);
 
 		} else if (browserName.equalsIgnoreCase("firefox")) {
 
 			// fireforx initialize
-			WebDriverManager.firefoxdriver().setup();
+			//WebDriverManager.firefoxdriver().setup();
 			driver = new FirefoxDriver();
 
 		}
