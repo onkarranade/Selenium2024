@@ -26,10 +26,15 @@ public class CartPage extends AbstractComponent {
 	@FindBy(xpath = "//button[contains(text(),'Checkout')]")
 	WebElement checkoutButton;
 
-	public boolean verifyCartProducts(String productName) {
-		// List<WebElement>
-		// cartProducts=driver.findElements(By.cssSelector(".cartSection h3"));
+	// alternative By locators:
+	// private By cartProductsBy = By.cssSelector(".cartSection h3");
+	// private By checkoutButtonBy = By.xpath("//button[contains(text(),'Checkout')]");
 
+	public boolean verifyCartProducts(String productName) {
+		// example if using the By locator:
+		// List<WebElement> list = driver.findElements(cartProductsBy);
+		// Boolean match = list.stream()
+		//         .anyMatch(cartProduct -> cartProduct.getText().equalsIgnoreCase(productName));
 		// System.out.println(cartProducts.get(0).getText());
 		Boolean match = cartProducts.stream()
 				.anyMatch(cartProduct -> cartProduct.getText().equalsIgnoreCase(productName));
@@ -37,6 +42,7 @@ public class CartPage extends AbstractComponent {
 	}
 
 	public void checkOut() {
+		// alternative: driver.findElement(checkoutButtonBy).click();
 		checkoutButton.click();
 	}
 }

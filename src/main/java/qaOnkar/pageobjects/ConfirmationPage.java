@@ -26,13 +26,20 @@ public class ConfirmationPage extends AbstractComponent {
 	WebElement orderID;
 
 	By text = By.cssSelector(".hero-primary");
+	// alternative By locators:
+	// private By confirmTextBy = By.cssSelector(".hero-primary");
+	// private By orderIdBy = By.cssSelector("label[class='ng-star-inserted']");
 
 	public String confirmText() {
+		// alt example:
+		// waitForElementToAppear(confirmTextBy);
+		// return driver.findElement(confirmTextBy).getText();
 		waitForElementToAppear(text);
 		return confirmtext.getText();
 	}
 
 	public String getOrderID() {
+		// String ordernumber = driver.findElement(orderIdBy).getText();
 		String ordernumber = orderID.getText();
 		return ordernumber;
 	}

@@ -10,6 +10,11 @@ import qaOnkar.AbstractComponents.AbstractComponent;
 public class LoginPage extends AbstractComponent {
 
 	WebDriver driver;
+	// without @FindBy (By locators can be declared at class level):
+	// private By userEmailBy = By.id("userEmail");
+	// private By userPasswordBy = By.id("userPassword");
+	// private By loginBy = By.id("login");
+	// private By errorFlyoutBy = By.cssSelector("[class*='flyInOut']");
 
 	public LoginPage(WebDriver driver) {
 		super(driver);
@@ -32,6 +37,10 @@ public class LoginPage extends AbstractComponent {
 	WebElement errorFlyout;
 
 	public void loginApplication(String email, String password) {
+		// example using the By locators instead of @FindBy elements:
+		// driver.findElement(userEmailBy).sendKeys(email);
+		// driver.findElement(userPasswordBy).sendKeys(password);
+		// driver.findElement(loginBy).click();
 		userEmail.sendKeys(email);
 		userPassword.sendKeys(password);
 		login.click();
@@ -45,6 +54,9 @@ public class LoginPage extends AbstractComponent {
 
 	public String getErrorMessage() {
 
+		// alternative example:
+		// waitForWebElementToAppear(driver.findElement(errorFlyoutBy));
+		// return driver.findElement(errorFlyoutBy).getText();
 		waitForWebElementToAppear(errorFlyout);
 		return errorFlyout.getText();
 	}

@@ -28,14 +28,23 @@ public class CheckoutPage extends AbstractComponent {
 	WebElement Submit;
 
 	By result = By.cssSelector(".ta-results");
+	// alternative By locators:
+	// private By countryInputBy = By.cssSelector("input[placeholder='Select Country']");
+	// private By resultCountryBy = By.xpath("//button[contains(@class,'ta-item')][2]");
+	// private By submitBy = By.cssSelector(".action__submit");
 
 	public void selectCountry(String countryName) {
+		// example using By locator:
+		// driver.findElement(countryInputBy).sendKeys(countryName);
+		// waitForElementToAppear(result);
+		// driver.findElement(resultCountryBy).click();
 		country.sendKeys(countryName);
 		waitForElementToAppear(result);
 		resultCountry.click();
 	}
 
 	public void Submit() {
+		// driver.findElement(submitBy).click();
 		Submit.click();
 	}
 }

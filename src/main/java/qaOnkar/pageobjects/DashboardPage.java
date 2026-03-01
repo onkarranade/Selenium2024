@@ -18,6 +18,11 @@ public class DashboardPage extends AbstractComponent {
 
 	WebDriver driver;
 	WebDriverWait w;
+	// By locators as alternative:
+	// private By ordersButtonBy = By.xpath("//button[@routerlink='/dashboard/myorders']");
+	// private By productsByAlt = By.cssSelector(".mb-3");
+	// private By spinnerBy = By.cssSelector(".ng-animating");
+	// private By cartButtonBy = By.cssSelector("[routerlink*='/dashboard/cart']");
 
 	public DashboardPage(WebDriver driver) {
 		super(driver);
@@ -45,6 +50,9 @@ public class DashboardPage extends AbstractComponent {
 	WebElement cartButton;
 
 	public List<WebElement> getProductList() {
+		// if using By locator:
+		// waitForElementToAppear(productsByAlt);
+		// return driver.findElements(productsByAlt);
 		waitForElementToAppear(ProductsBy);
 		return products;
 	}
@@ -62,6 +70,7 @@ public class DashboardPage extends AbstractComponent {
 		prod.findElement(By.cssSelector(".card-body button:last-of-type")).click();
 		waitForElementToAppear(toastMessage);
 		waitForElementToDisappear(spinner);
+		// alternatively: driver.findElement(cartButtonBy).click();
 		cartButton.click();
 
 	}
